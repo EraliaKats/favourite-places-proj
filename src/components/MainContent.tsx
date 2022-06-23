@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import FavPlaceEntry from "./FavPlaceEntry";
 
 function MainContent(): JSX.Element {
   interface EntryInfo {
@@ -23,34 +24,6 @@ function MainContent(): JSX.Element {
     fetchEntries();
   }, []);
 
-  function displayEachEntry(entry: EntryInfo) {
-    return (
-      <div key={entry.entry_id} className="entry-block">
-        <h3> {entry.title} </h3>
-        <h4>
-          {` ${entry.place}, ${entry.country} `}
-        </h4>
-        <p>{entry.summary}</p>
-        <img src={entry.image} alt={`${entry.place}`} style={{width: 600 }} />
-        <div className="interactions-entry-block">
-        <iframe
-          src={entry.maps} 
-          title={`${entry.place} location on Google Maps`}
-          width="300"
-          height="175"
-          frameBorder="0"
-          style={{ border: 0, padding: 10 }}
-          aria-hidden="false"
-          tabIndex={0}
-          allowFullScreen={false}
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-        <button className="button-like">Like ♡</button> 
-      </div>
-      </div>      
-    );
-  }
-
   // const myColours = [
   //   "#413e4a", dark grey
   //   "#73626e", greyish purple
@@ -61,7 +34,20 @@ function MainContent(): JSX.Element {
 
   return (
     <>
-      <main>{entries?.map(displayEachEntry)}</main>
+      <main>
+        {entries?.map((entry: EntryInfo) => (
+          <FavPlaceEntry
+            entry_id={entry.entry_id}
+            title={entry.title}
+            place={entry.place}
+            country={entry.country}
+            summary={entry.summary}
+            image={entry.image}
+            maps={entry.maps}
+            key={entry.entry_id}
+          />
+        ))}
+      </main>
     </>
   );
 }

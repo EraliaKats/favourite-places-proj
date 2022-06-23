@@ -1,23 +1,28 @@
-interface FavPlaceProps {
-  title: string;
-  place: string;
-  country: string;
-  maps: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-  summary: string;
-}
+import { FavPlaceProps } from "../interfaces/interfaces";
 
 function FavPlaceEntry(props: FavPlaceProps): JSX.Element {
   return (
-    <section>
-      <h2>{props.title}</h2>
-      <img src={props.image.src} alt={props.image.alt} />
-      <a href={props.maps}>click me to see where this place is on a map!</a>
+    <div key={props.entry_id} className="entry-block">
+      <h3> {props.title} </h3>
+      <h4>{` ${props.place}, ${props.country} `}</h4>
       <p>{props.summary}</p>
-    </section>
+      <img src={props.image} alt={`${props.place}`} style={{ width: 600 }} />
+      <div className="interactions-entry-block">
+        <iframe
+          src={props.maps}
+          title={`${props.place} location on Google Maps`}
+          width="300"
+          height="175"
+          frameBorder="0"
+          style={{ border: 0, padding: 10 }}
+          aria-hidden="false"
+          tabIndex={0}
+          allowFullScreen={false}
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <button className="button-like">Like ♡</button>
+      </div>
+    </div>
   );
 }
 

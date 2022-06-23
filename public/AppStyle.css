@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 10px;
   border: 0.25px solid rgb(226, 206, 206); 
   border-radius: 15px;
-  width: 99%;
+  width: max-content;
 }
 
 body{
